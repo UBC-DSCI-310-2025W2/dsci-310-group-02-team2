@@ -7,43 +7,67 @@
 - Renata Lovette
 
 ---
-
 # Project Summary
 
-This project investigates whether a consumer’s level of online activity can help predict their preference for online shopping. Specifically, we examine whether factors such as internet usage, social media usage, and technological familiarity are associated with a higher likelihood of shopping online rather than in physical stores.
+This project investigates whether website engagement metrics can predict whether an online visitor will complete a purchase on an e-commerce website. Specifically, we examine behavioural indicators such as the number of pages visited, time spent on different types of pages, and website engagement metrics such as bounce rate and exit rate.
 
-Using the **Online vs In-Store Shopping Behaviour dataset**, we perform exploratory data analysis and build a classification model to determine whether online activity variables can predict a consumer’s preferred shopping channel.
+Using the **Online Shoppers Purchasing Intention Dataset**, we perform exploratory data analysis and build a classification model to determine whether website activity patterns can predict whether a visitor will generate revenue for the website.
 
-In addition to answering this research question, this project emphasizes **reproducible data science practices**, including version control using GitHub, literate programming using Jupyter notebooks, and containerized computational environments using Docker.
+In addition to addressing this research question, this project emphasizes **reproducible data science practices**, including version control using GitHub, literate programming using Jupyter notebooks, and containerized computational environments using Docker.
 
 ---
 
 # Research Question
 
-**Can consumer online activity (internet usage, social media usage, and tech-savviness) predict whether a customer prefers online shopping or in-store shopping?**
+**Can website engagement metrics (such as page visits, time spent on pages, and bounce rate) predict whether an online visitor will make a purchase?**
 
 ---
 
 # Dataset
 
-The dataset used in this project is the **Online vs In-Store Shopping Behaviour Dataset**, publicly available on Kaggle.
+The dataset used in this project is the **Online Shoppers Purchasing Intention Dataset**, which contains information about user behaviour during online shopping sessions.
 
 Dataset source:
 
-https://www.kaggle.com/datasets/shree0910/online-vs-in-store-shopping-behaviour-dataset
+https://archive.ics.uci.edu/ml/datasets/Online+Shoppers+Purchasing+Intention+Dataset
 
-The dataset contains demographic and behavioural information about consumers, including variables such as:
+Direct dataset file:
 
-- Age  
-- Gender  
-- Income level  
-- Internet usage (hours online)  
-- Social media usage  
-- Tech-savviness  
-- Shopping frequency  
-- Preferred shopping method (online vs in-store)
+https://archive.ics.uci.edu/ml/machine-learning-databases/00468/online_shoppers_intention.csv
 
-The target variable used in this project is **shopping channel preference**, which indicates whether a consumer prefers **online shopping or in-store shopping**.
+The dataset includes information about user browsing behaviour during e-commerce sessions. Key variables include:
+
+- **Administrative** – number of administrative pages visited  
+- **Administrative_Duration** – time spent on administrative pages  
+- **Informational** – number of informational pages visited  
+- **Informational_Duration** – time spent on informational pages  
+- **ProductRelated** – number of product-related pages visited  
+- **ProductRelated_Duration** – time spent on product-related pages  
+- **BounceRates** – proportion of visitors leaving after viewing a page  
+- **ExitRates** – proportion of exits from a page  
+- **PageValues** – average value of a page before a purchase  
+- **SpecialDay** – proximity to special shopping days (e.g., holidays)
+
+Additional categorical variables include:
+
+- Month
+- OperatingSystems
+- Browser
+- Region
+- TrafficType
+- VisitorType
+- Weekend
+
+The target variable used in this project is:
+
+**Revenue**
+
+```
+TRUE  → the visitor completed a purchase  
+FALSE → the visitor did not complete a purchase
+```
+
+This makes the task a **binary classification problem**.
 
 ---
 
