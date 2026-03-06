@@ -1,4 +1,4 @@
-# Online vs In-Store Shopping Behaviour Analysis
+# Predicting Online Purchase Behaviour from Website Engagement
 
 ## Contributors
 - Aidan Aimy 
