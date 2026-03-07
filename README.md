@@ -99,13 +99,13 @@ To reproduce this analysis, follow the steps below.
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/UBC-DSCI/dsci-310-group-XX-project-name.git
+git clone https://github.com/UBC-DSCI/dsci-310-group-02-team2.git
 ```
 
 ### 2. Navigate to the project directory
 
 ```bash
-cd dsci-310-group-XX-project-name
+cd dsci-310-group-02-team2
 ```
 
 ### 3. Build the Docker image
