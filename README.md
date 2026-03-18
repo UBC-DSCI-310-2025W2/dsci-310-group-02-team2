@@ -7,23 +7,23 @@
 - Renata Lovette
 
 ---
-# Project Summary
+# Abstract
 
 This project investigates whether website engagement metrics can predict whether an online visitor will complete a purchase on an e-commerce website. Specifically, we examine behavioural indicators such as the number of pages visited, time spent on different types of pages, and website engagement metrics such as bounce rate and exit rate.
 
-Using the **Online Shoppers Purchasing Intention Dataset**, we perform exploratory data analysis and build a classification model to determine whether website activity patterns can predict whether a visitor will generate revenue for the website.
+Using the **Online Shoppers Purchasing Intention Dataset**, we perform exploratory data analysis and build a classification model using logistic regression to determine whether website activity patterns can predict whether a visitor will generate revenue for the website.
 
 In addition to addressing this research question, this project emphasizes **reproducible data science practices**, including version control using GitHub, literate programming using Jupyter notebooks, and containerized computational environments using Docker.
 
 ---
 
-# Research Question
+## Research Question
 
 **Can website engagement metrics (such as page visits, time spent on pages, and bounce rate) predict whether an online visitor will make a purchase?**
 
 ---
 
-# Dataset
+## Dataset
 
 The dataset used in this project is the **Online Shoppers Purchasing Intention Dataset**, which contains information about user behaviour during online shopping sessions.
 
@@ -67,11 +67,17 @@ TRUE  → the visitor completed a purchase
 FALSE → the visitor did not complete a purchase
 ```
 
-This makes the task a **binary classification problem**.
+This makes the task a **logistic regression problem**.
 
 ---
 
-# Methods Overview
+# Project Summary
+
+This project used logistic regression to predict whether online visitors would complete a purchase based on browsing behaviour metrics like page visits, duration, and bounce rates. The model achieved 87.8% accuracy but struggled to identify actual purchasers due to class imbalance, which was partially addressed through class weighting. Results confirm that engagement metrics carry meaningful predictive signal; features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model. Future work could improve predictive performance through implementingmore advanced models, resampling techniques, and richer feature sets that captures a more holistic insight into customer behaviours.
+
+---
+
+## Methods Overview
 
 The analysis will follow the typical stages of a data science workflow:
 
@@ -85,7 +91,7 @@ The analysis will follow the typical stages of a data science workflow:
    Summarize the dataset and create visualizations to understand relationships between online activity and shopping behaviour.
 
 4. **Predictive Modeling**  
-   Build a classification model to predict shopping preference based on online activity and demographic features.
+   Build a logistic regression model to predict shopping preference based on online activity and demographic features.
 
 5. **Model Evaluation**  
    Evaluate the model's performance using appropriate metrics such as accuracy and confusion matrices.
@@ -149,12 +155,12 @@ After launching the container, open the Jupyter link shown in the terminal and r
 
 This project requires the following software and Python libraries:
 
-- Python 3.10
-- pandas
-- numpy
-- scikit-learn
-- matplotlib
-- seaborn
+- Python 3.11
+- pandas 2.3.3
+- numpy 2.3.5
+- scikit-learn 1.8.0
+- matplotlib 3.10.8
+- seaborn 0.13.2
 - Jupyter Notebook
 
 These dependencies will be automatically installed when building the Docker container.
