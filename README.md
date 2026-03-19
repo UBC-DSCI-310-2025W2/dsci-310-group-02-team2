@@ -71,13 +71,7 @@ This makes the task a **logistic regression problem**.
 
 ---
 
-# Project Summary
-
-This project used logistic regression to predict whether online visitors would complete a purchase based on browsing behaviour metrics like page visits, duration, and bounce rates. The model achieved 87.8% accuracy but struggled to identify actual purchasers due to class imbalance, which was partially addressed through class weighting. Results confirm that engagement metrics carry meaningful predictive signal; features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model. Future work could improve predictive performance through implementingmore advanced models, resampling techniques, and richer feature sets that captures a more holistic insight into customer behaviours.
-
----
-
-## Methods Overview
+# Methods Overview
 
 The analysis will follow the typical stages of a data science workflow:
 
@@ -95,6 +89,12 @@ The analysis will follow the typical stages of a data science workflow:
 
 5. **Model Evaluation**  
    Evaluate the model's performance using appropriate metrics such as accuracy and confusion matrices.
+
+---
+
+# Project Summary
+
+This project used logistic regression to predict whether online visitors would complete a purchase based on browsing behaviour metrics like page visits, duration, and bounce rates. The model achieved 87.8% accuracy but struggled to identify actual purchasers due to class imbalance, which was partially addressed through class weighting. Results confirm that engagement metrics carry meaningful predictive signal; features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model. Future work could improve predictive performance through implementingmore advanced models, resampling techniques, and richer feature sets that captures a more holistic insight into customer behaviours.
 
 ---
 
