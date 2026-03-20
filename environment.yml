@@ -8,4 +8,4 @@ dependencies:
   - scikit-learn=1.8.0
   - matplotlib=3.10.8
   - seaborn=0.13.2
-  - jupyter
+  - jupyter=1.1.1
