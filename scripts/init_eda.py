@@ -16,7 +16,7 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     Takes cleaned dataset file path and performs EDA (see comments below for details). Also 
     takes a prefix string as 2nd argument to append to output file after EDA is performed. The 
     EDA performed is specific to the `online_shoppers` dataset.
-    NOTE: ensure the dataset is clean before using this function.
+    z
     """
     #load cleaned dataset
     df = pd.read_csv(data_path)
@@ -48,7 +48,7 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     plt.ylabel("Count")
     plt.title("Revenue Distribution by Visitor Type")
     plt.show()
-    plt.savefig("results/revenue_by_visitor_type.png")
+    plt.savefig(f"{output_prefix}_revenue_by_visitor_type.png")
     plt.close()
 
     #correlation map of features 
@@ -57,7 +57,7 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     sns.heatmap(feature_correlation, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
     plt.pyplot.title("Online Shoppers Intention Correlation Heatmap")
     plt.pyplot.show()
-    plt.savefig(f"results/{output_prefix}_correlation_heatmap.png")
+    plt.savefig(f"{output_prefix}_correlation_heatmap.png")
     plt.close()
 
     print(f"EDA complete. Files written with prefix: {output_prefix}")
