@@ -9,4 +9,4 @@ COPY . .
 
 CMD ["conda", "run", "--no-capture-output", "-n", "dsci-310-team2", \
      "jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", \
-     "--no-browser", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+     "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
