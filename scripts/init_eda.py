@@ -29,19 +29,19 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     overview = pd.DataFrame({
         "Features": df.columns,
         "Data Types": df.dtypes.astype(str).values, 
-        "Non-null Values": df.notnull().sum.values, 
-        "Missing Values": df.isnull().sum.values, 
+        "Non-null Values": df.notnull().sum().values, 
+        "Missing Values": df.isnull().sum().values, 
         "Unique Values": df.nunique().values
     })
     save_table(overview, f"{output_prefix}_overview.csv")
 
     #revenue count: 
-    rev_count_table = df["Revenue"].value_counts().reset_index()
-    rev_count_table.columns = ["Revenue", "Count"]
+    rev_count_table = df["revenue"].value_counts().reset_index()
+    rev_count_table.columns = ["revenue", "Count"]
     save_table(rev_count_table, f"{output_prefix}_revenue_count.csv")
 
     #Bar graph: revenue count per customer 
-    rev_count_by_customer = df.groupby('VisitorType')['Revenue'].value_counts().unstack()
+    rev_count_by_customer = df.groupby('visitortype')['revenue'].value_counts().unstack()
     rev_count_by_customer.plot(kind="bar", stacked=True, figsize=(8, 5))
 
     plt.xlabel("Vistor Type")
@@ -52,11 +52,11 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     plt.close()
 
     #correlation map of features 
-    feature_correlation = df.corr() 
-    plt.pyplot.figure(figsize=(10, 8))
+    feature_correlation = df.corr(numeric_only=True) 
+    plt.figure(figsize=(10, 8))
     sns.heatmap(feature_correlation, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
-    plt.pyplot.title("Online Shoppers Intention Correlation Heatmap")
-    plt.pyplot.show()
+    plt.title("Online Shoppers Intention Correlation Heatmap")
+    plt.show()
     plt.savefig(f"{output_prefix}_correlation_heatmap.png")
     plt.close()
 
