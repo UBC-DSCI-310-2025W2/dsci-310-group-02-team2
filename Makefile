@@ -4,10 +4,13 @@
 # This driver script automates the entire analysis pipeline within Docker.
 
 # --- Variables ---
-IMAGE_NAME = quarto-env
-# Using $(shell pwd) or $(CURDIR) to mount the local directory to /app in the container
-DOCKER_RUN = docker run --rm -v "$(shell pwd):/app" $(IMAGE_NAME)
+# Use flexible Docker image
+IMAGE_NAME ?= quarto-env
+DOCKER_RUN = docker run --rm -v "$(shell pwd):/app" -w /app $(IMAGE_NAME)
 CONDA_EXEC = conda run --no-capture-output -n dsci-310-team2
+
+
+
 
 # --- .PHONY Targets ---
 .PHONY: all clean data_processing eda modeling report
@@ -50,7 +53,7 @@ report: online-purchase-prediction.html
 online-purchase-prediction.html: analysis/online-purchase-prediction.qmd eda modeling
 	$(DOCKER_RUN) $(CONDA_EXEC) quarto render analysis/online-purchase-prediction.qmd \
 		--to html \
-		--output-dir ..
+		--output-dir .
 
 # --- 5. Cleaning ---
 # Deletes all generated files to reset the project state
