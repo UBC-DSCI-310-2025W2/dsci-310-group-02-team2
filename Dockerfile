@@ -45,10 +45,10 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# 2. Install Quarto (specifically the version for Linux ARM64)
-RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.550/quarto-1.4.550-linux-arm64.deb \
-    && dpkg -i quarto-1.4.550-linux-arm64.deb \
-    && rm quarto-1.4.550-linux-arm64.deb
+# 2. Install Quarto (specifically the version for Linux AMD64)
+RUN curl -LO https://github.com/quarto-dev/quarto-cli/releases/download/v1.4.550/quarto-1.4.550-linux-amd64.deb \
+  && dpkg -i quarto-1.4.550-linux-amd64.deb \
+  && rm quarto-1.4.550-linux-amd64.deb
 
 # 3. Create the Conda environment (Make sure to remove 'quarto' from your environment.yml first!)
 COPY environment.yml .
