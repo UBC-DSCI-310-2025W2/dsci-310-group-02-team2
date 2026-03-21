@@ -1,4 +1,5 @@
 # Makefile
+# usgae: make all --> open online-purchase-prediction.html in browser to view the final report.
 # Group 2, DSCI 310
 # This driver script automates the entire analysis pipeline within Docker.
 
@@ -58,3 +59,5 @@ clean:
 	rm -f results/*
 	rm -f online-purchase-prediction.html
 	rm -rf analysis/online-purchase-prediction_files
+
+
