@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
-<div id="f347e341" class="cell" data-execution_count="1">
+<div id="942ddb3a" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -151,7 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-loading" class="level2">
 <h2 class="anchored" data-anchor-id="data-loading">Data Loading</h2>
 <p>In this section, we load the dataset and inspect its structure.</p>
-<div id="d5c6078f" class="cell" data-execution_count="2">
+<div id="f2cd22d6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'/app/data/online_shoppers_data.csv'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original shape:"</span>, df.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Converting categorical variables to appropriate formats</li>
 <li>Preparing features for modeling</li>
 </ul>
-<div id="23150f4e" class="cell" data-execution_count="3">
+<div id="ede9b79d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing values</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>missing_values <span class="op">=</span> df.isnull().<span class="bu">sum</span>()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Missing values:</span><span class="ch">\n</span><span class="st">"</span>, missing_values)</span>
@@ -231,7 +231,7 @@ Revenue                       bool
 dtype: object</code></pre>
 </div>
 </div>
-<div id="c84bfc7f" class="cell" data-execution_count="4">
+<div id="30458267" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># column names</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.columns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -243,7 +243,7 @@ dtype: object</code></pre>
       dtype='object')</code></pre>
 </div>
 </div>
-<div id="9abe9c41" class="cell" data-execution_count="5">
+<div id="8ae0bf86" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical data to numeric</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -291,7 +291,7 @@ Revenue                       bool
 dtype: object</code></pre>
 </div>
 </div>
-<div id="ed07b15c" class="cell" data-execution_count="6">
+<div id="c20bbe36" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for impossible values</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that count variables are not negative</span></span>
@@ -343,7 +343,7 @@ dtype: object</code></pre>
 <pre><code>Impossible value checks complete.</code></pre>
 </div>
 </div>
-<div id="b25f67f1" class="cell" data-execution_count="7">
+<div id="e3acf8d4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>categorical_cols <span class="op">=</span> [</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Month"</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"OperatingSystems"</span>,</span>
@@ -377,7 +377,7 @@ Unique values in VisitorType:
 [0, 1, 2]</code></pre>
 </div>
 </div>
-<div id="b73f70d1" class="cell" data-execution_count="8">
+<div id="9225b793" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save cleaned data</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'/app/data/shopping_data_cleaned.csv'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -400,7 +400,7 @@ Final shape: (12330, 18)</code></pre>
 <li>Time spent on different types of pages (<code>Administrative_Duration</code>, <code>Informational_Duration</code>, <code>ProductRelated_Duration</code>)</li>
 <li><code>BounceRates</code> and <code>ExitRates</code></li>
 </ul>
-<div id="a2055b87" class="cell" data-execution_count="9">
+<div id="90c6fdd6" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
@@ -549,7 +549,7 @@ Final shape: (12330, 18)</code></pre>
 <blockquote class="blockquote">
 <p>How many visits resulted in a purchase? Do returning or new customers make more purchases?</p>
 </blockquote>
-<div id="74e46f3e" class="cell" data-execution_count="10">
+<div id="8cf877ef" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count of page visits per page type</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rev_count <span class="op">=</span> df[<span class="st">'Revenue'</span>].value_counts()</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rev_count</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -560,7 +560,7 @@ True      1908
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="c0563f3f" class="cell" data-execution_count="11">
+<div id="bf8855ba" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># revenue distribution among different customer types</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rev_count_customer <span class="op">=</span> df.groupby(<span class="st">'VisitorType'</span>)[<span class="st">'Revenue'</span>].value_counts()</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rev_count_customer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -581,7 +581,7 @@ Name: count, dtype: int64</code></pre>
 <blockquote class="blockquote">
 <p>Which pages have the most traction? Is there a difference in page visits that result in revenue and the ones that don’t? Are there behavioural differences between returning and new customers?</p>
 </blockquote>
-<div id="268788d9" class="cell" data-execution_count="12">
+<div id="7e3ec26a" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Page visits vs Revenue</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>page_columns <span class="op">=</span> [<span class="st">'Administrative'</span>, <span class="st">'Administrative_Duration'</span>, <span class="st">'Informational'</span>, <span class="st">'Informational_Duration'</span>,</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">'ProductRelated'</span>, <span class="st">'ProductRelated_Duration'</span>]</span>
@@ -640,7 +640,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<div id="ec739b3e" class="cell" data-execution_count="13">
+<div id="9a8c1d1b" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Page visits vs customer type</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>visits_vs_customer <span class="op">=</span> df.groupby(<span class="st">'VisitorType'</span>)[page_columns].mean()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -709,7 +709,7 @@ Name: count, dtype: int64</code></pre>
 </section>
 <section id="correlation-map-of-features" class="level3">
 <h3 class="anchored" data-anchor-id="correlation-map-of-features">Correlation Map of features</h3>
-<div id="f6454e70" class="cell" data-execution_count="14">
+<div id="da0e2383" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>feature_correlation <span class="op">=</span> df.corr()</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.pyplot.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
@@ -730,7 +730,7 @@ Name: count, dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="classification-model">Classification Model</h2>
 <p>Because the target variable <strong>Revenue</strong> indicates whether a purchase occurred (True or False), this problem is formulated as a <strong>binary classification problem</strong>.</p>
 <p>We will train a logistic regression model using website engagement metrics to predict whether a visitor completes a purchase. We chose a logistic regression model because it is well suited for a binary classification problem. We begin by splitting the dataset into training and testing data using an 80/20 ratio. Then we standardized our data using <code>StandardScaler()</code> to prevent variables of greater magnitude from having a disproportionate influence on the model before fitting it the <code>LogisticRegression</code> model from the Scikit-Learn library.</p>
-<div id="1f489ec3" class="cell" data-execution_count="15">
+<div id="dbf796c7" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -1673,7 +1673,7 @@ forceTheme('sk-container-id-1');</script>
 <li>Confusion matrix</li>
 </ul>
 <p>These metrics will help assess how well the model predicts purchasing behaviour.</p>
-<div id="bf5841e4" class="cell" data-execution_count="16">
+<div id="faa6c873" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.score(X_test_scaled, y_test)</span>
@@ -1701,7 +1701,7 @@ forceTheme('sk-container-id-1');</script>
 <h2 class="anchored" data-anchor-id="class-weighting-model">Class Weighting Model</h2>
 <p>One limitation of the initial logistic regression model is that the dataset is imbalanced: the number of sessions that did not result in a purchase is much larger than the number of sessions that did. As a result, the model tends to predict the majority class (“No Purchase”) more often, which leads to a high overall accuracy but relatively low recall for the purchase class. In other words, the model fails to correctly identify many visitors who actually complete a purchase.</p>
 <p>To address this issue, we implemented class weighting in the logistic regression model by setting <code>class_weight="balanced"</code>. This approach automatically adjusts the importance of each class during model training. Misclassifying the minority class (purchasers) is penalized more heavily than misclassifying the majority class (non-purchasers). As a result, the model is encouraged to pay greater attention to patterns associated with purchase behaviour.</p>
-<div id="301a26cd" class="cell" data-execution_count="17">
+<div id="c9c0f470" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>weighted_model <span class="op">=</span> LogisticRegression(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    max_iter<span class="op">=</span><span class="dv">1000</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
@@ -2634,7 +2634,7 @@ forceTheme('sk-container-id-2');</script>
 <li>Confusion matrix</li>
 </ul>
 <p>These metrics will help assess how well the model predicts purchasing behaviour.</p>
-<div id="9bff09a8" class="cell" data-execution_count="18">
+<div id="026139d8" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> weighted_model.score(X_test_scaled, y_test)</span>
