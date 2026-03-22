@@ -144,12 +144,6 @@ This will:
 
 To view the final report, open `analysis/online-purchase-prediction.html` in your browser.
 
-Alternatively, render the Quarto document directly (requires Quarto installed):
-
-```bash
-quarto render analysis/online-purchase-prediction.qmd
-```
-
 ### Project Structure
 
 - `analysis/`: Quarto document and rendered HTML report
