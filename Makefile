@@ -53,7 +53,7 @@ report: online-purchase-prediction.html
 online-purchase-prediction.html: analysis/online-purchase-prediction.qmd eda modeling
 	$(DOCKER_RUN) $(CONDA_EXEC) quarto render analysis/online-purchase-prediction.qmd \
 		--to html \
-		--output-dir .
+		--output-dir . 
 
 # --- 5. Cleaning ---
 # Deletes all generated files to reset the project state
