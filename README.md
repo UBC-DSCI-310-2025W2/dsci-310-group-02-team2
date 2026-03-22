@@ -98,55 +98,107 @@ This project used logistic regression to predict whether online visitors would c
 
 ---
 
-# How to Run the Analysis
+## Reproducibility
 
-To reproduce this analysis, follow the steps below.
+This project emphasizes reproducible data science practices using version control (GitHub), literate programming (Quarto), and containerized environments (Docker).
 
-### 1. Clone the repository
+### Prerequisites
+
+- Docker
+- Conda or Miniconda
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/UBC-DSCI-310-2025W2/dsci-310-group-02-team2.git
+   cd dsci-310-group-02-team2
+   ```
+
+2. Create the Conda environment:
+   ```bash
+   conda env create -f environment.yml
+   conda activate dsci-310-team2
+   ```
+
+3. Build the Docker image:
+   ```bash
+   docker build -t quarto-env .
+   ```
+
+### Running the Analysis
+
+The analysis is implemented in `analysis/online-purchase-prediction.qmd`, a Quarto document that combines code, narrative, and visualizations.
+
+To run the full reproducible pipeline:
 
 ```bash
-git clone https://github.com/UBC-DSCI/dsci-310-group-02-team2.git
+make all
 ```
 
-### 2. Navigate to the project directory
+This will:
+- Clean the raw data (`data/online_shoppers_data.csv`) and save to `data/shopping_data_cleaned.csv`
+- Perform exploratory data analysis and save plots/results to `results/`
+- Build and evaluate the logistic regression model, saving confusion matrix and classification report to `results/`
+- Render the Quarto report to `analysis/online-purchase-prediction.html`
+
+To view the final report, open `analysis/online-purchase-prediction.html` in your browser.
+
+Alternatively, render the Quarto document directly (requires Quarto installed):
 
 ```bash
-cd dsci-310-group-02-team2
+quarto render analysis/online-purchase-prediction.qmd
 ```
 
-### 3. Build the Docker image
+### Project Structure
 
-```bash
-docker build -t shopping-behaviour-analysis .
-```
+- `analysis/`: Quarto document and rendered HTML report
+- `data/`: Raw and cleaned datasets
+- `results/`: EDA plots, model confusion matrices, and classification reports
+- `scripts/`: Modular Python scripts for data processing, EDA, and modeling
+- `environment.yml`: Conda environment specification
+- `Dockerfile`: Docker image for containerized execution
+- `Makefile`: Automation script for the full pipeline
 
-### 4. Run the Docker container
+### Scripts
 
-```bash
-docker run -p 8888:8888 shopping-behaviour-analysis
-```
+Individual scripts can be run separately:
 
-### 5. Open the Jupyter Notebook
-
-After launching the container, open the Jupyter link shown in the terminal and run the analysis notebook.
-
----
+- `python scripts/clean_data.py data/online_shoppers_data.csv data/shopping_data_cleaned.csv`
+- `python scripts/init_eda.py data/shopping_data_cleaned.csv results/eda`
+- `python scripts/create_model_and_results.py data/shopping_data_cleaned.csv results/model`
 
 # Project Structure
 
 ```
-.
-├── README.md
+dsci-310-group-02-team2/
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
-├── LICENSE.md
 ├── Dockerfile
-├── data/
-│   └── shopping_behavior.csv
+├── LICENSE.md
+├── Makefile
+├── README.md
 ├── analysis/
-│   └── shopping_activity_analysis.ipynb
-└── .github/workflows/
-    └── publish_docker_image.yml
+│   ├── online-purchase-prediction.html
+│   ├── online-purchase-prediction.qmd
+│   ├── references.bib
+│   └── online-purchase-prediction_files/
+│       ├── figure-html/
+│       └── libs/
+├── conda-lock.yml
+├── environment.yml
+├── data/
+│   ├── online_shoppers_data.csv
+│   └── shopping_data_cleaned.csv
+├── results/
+│   ├── eda_overview.csv
+│   ├── eda_revenue_count.csv
+│   └── model_classification_report.csv
+└── scripts/
+    ├── clean_data.py
+    ├── create_model_and_results.py
+    ├── init_eda.py
+    └── load_data.py
 ```
 
 ---
@@ -155,13 +207,19 @@ After launching the container, open the Jupyter link shown in the terminal and r
 
 This project requires the following software and Python libraries:
 
-- Python 3.11
-- pandas 2.3.3
-- numpy 2.3.5
-- scikit-learn 1.8.0
-- matplotlib 3.10.8
-- seaborn 0.13.2
-- Jupyter Notebook
+- **Software:**
+  - Docker
+  - Conda or Miniconda
+  - Quarto (for rendering the analysis document)
+
+- **Python Libraries (from environment.yml):**
+  - Python 3.11
+  - numpy 2.3.5
+  - pandas 2.3.3
+  - scikit-learn 1.8.0
+  - matplotlib 3.10.8
+  - seaborn 0.13.2
+  - jupyter 1.1.1
 
 These dependencies will be automatically installed when building the Docker container.
 
