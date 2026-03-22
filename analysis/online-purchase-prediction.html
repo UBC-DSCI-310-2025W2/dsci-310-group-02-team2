@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="online-purchase-prediction_files/libs/clipboard/clipboard.min.js"></script>
@@ -66,10 +86,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#classification-model" id="toc-classification-model" class="nav-link" data-scroll-target="#classification-model">Classification Model</a></li>
   <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model Evaluation</a></li>
   </ul></li>
-  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
-  <ul class="collapse">
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -108,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Understanding these relationships may help businesses better understand online consumer behaviour and optimize website design and marketing strategies.</p>
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>E-commerce platforms collect large amounts of behavioural data about how users interact with websites. Metrics such as the number of pages visited, time spent browsing products, and bounce rates can provide insight into customer engagement and purchase intent. Understanding which behavioural signals are associated with successful purchases can help businesses improve their online shopping experience.</p>
+<p>E-commerce platforms collect large amounts of behavioural data about how users interact with websites. Previous research has shown that web usage mining can be used to improve website design and understand user behaviour <span class="citation" data-cites="carmona2012web">(<a href="#ref-carmona2012web" role="doc-biblioref">Carmona et al. 2012</a>)</span>. Additionally, modeling browsing behaviour has been explored using probabilistic approaches such as Markov models <span class="citation" data-cites="awad2012prediction">(<a href="#ref-awad2012prediction" role="doc-biblioref">Awad and Khalil 2012</a>)</span>. Metrics such as the number of pages visited, time spent browsing products, and bounce rates can provide insight into customer engagement and purchase intent. Understanding which behavioural signals are associated with successful purchases can help businesses improve their online shopping experience.</p>
 <p>In this project, we analyze user session data from an e-commerce website to investigate whether engagement metrics can predict whether a visitor completes a purchase.</p>
 <section id="research-question" class="level3">
 <h3 class="anchored" data-anchor-id="research-question">Research Question</h3>
@@ -137,6 +155,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="methods" class="level1">
 <h1>Methods</h1>
+<p>Predicting online purchasing behaviour has been widely studied using both traditional statistical models and machine learning approaches. For example, logistic regression and other classification methods have been used to model purchasing decisions based on user behaviour <span class="citation" data-cites="vandenpoel2004predicting">(<a href="#ref-vandenpoel2004predicting" role="doc-biblioref">Van den Poel and Buckinx 2004</a>)</span>. More recently, advanced models such as neural networks have been applied to improve prediction accuracy <span class="citation" data-cites="sakar2018real">(<a href="#ref-sakar2018real" role="doc-biblioref">Sakar et al. 2018</a>)</span>.</p>
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>The dataset used in this project is the Online Shoppers Purchasing Intention Dataset. Data were first loaded and saved locally using a data ingestion script, followed by a cleaning step that standardized column names and removed duplicate rows.</p>
@@ -416,19 +435,28 @@ Figure&nbsp;3: Confusion matrix for logistic regression model
 <p>In this project, we investigated whether website engagement metrics can be used to predict whether an online visitor completes a purchase. We explored patterns in browsing behaviour and used a logistic regression classification model to determine whether behavioural indicators such as page visits, browsing duration, and bounce rates could predict purchasing outcomes.</p>
 <p>The initial model achieved an overall accuracy of approximately 0.878 on the test dataset. The confusion matrix shows that the model correctly classified a large majority of non-purchasing visitors (2035 true negatives) while making relatively few false positive predictions (49). This suggests that the model is effective at identifying users who are unlikely to complete a purchase.</p>
 <p>However, the model performs less effectively when identifying actual purchasers. Out of 382 visitors who made a purchase, only 130 were correctly classified, while 252 were misclassified as non-purchasers. This corresponds to a relatively low recall for the purchase class. In practical terms, the model tends to be conservative and predicts “Not Purchased” more frequently, which likely reflects the imbalance in the dataset where non-purchasing visitors are much more common.</p>
-<p>To address this limitation, we explored the use of class weighting in the logistic regression model by setting class_weight=“balanced”. This approach assigns greater importance to the minority class (purchasers) during training, penalizing the model more heavily when purchasing sessions are misclassified. By reweighting the classes, the model is encouraged to pay greater attention to behavioural patterns associated with purchases, which can help improve recall for the purchase class.</p>
 <p>Despite this limitation, the results demonstrate that behavioural engagement metrics contain meaningful predictive information about purchase intent. Features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model.</p>
-<p>Future work could improve predictive performance in several ways. First, more advanced models such as random forests, gradient boosting methods, or neural networks may capture nonlinear relationships between browsing behaviour and purchasing outcomes. Second, techniques for handling class imbalance, such as resampling methods or adjusting classification thresholds—could improve the model’s ability to detect purchasers. Finally, incorporating additional features such as user demographics, marketing channel information, or historical customer behaviour could provide a more comprehensive view of user intent and lead to stronger predictive performance.</p>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
-<p>Carmona, C. J., et al.&nbsp;“Web Usage Mining to Improve the Design of an E-commerce Website: OrOliveSur.com.” Expert Systems With Applications, vol.&nbsp;39, no. 12, Apr.&nbsp;2012, pp.&nbsp;11243–49, doi:10.1016/j.eswa.2012.03.046.</p>
-<p>M. A. Awad and I. Khalil, “Prediction of User’s Web-Browsing Behavior: Application of Markov Model,” in IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics), vol.&nbsp;42, no. 4, pp.&nbsp;1131-1142, Aug.&nbsp;2012, doi: 10.1109/TSMCB.2012.2187441.</p>
-<p>Sakar, Cemal Okan et al.&nbsp;“Real-time prediction of online shoppers’ purchasing intention using multilayer perceptron and LSTM recurrent neural networks.” Neural Computing and Applications 31 (2018): 6893 - 6908.</p>
-<p>Van Den Poel, Dirk, and Wouter Buckinx. “Predicting Online-purchasing Behaviour.” European Journal of Operational Research, vol.&nbsp;166, no. 2, July 2004, pp.&nbsp;557–75, doi:10.1016/j.ejor.2004.04.022.</p>
+<p>Our findings are consistent with prior research showing that behavioural engagement metrics are useful predictors of purchasing intent <span class="citation" data-cites="vandenpoel2004predicting">(<a href="#ref-vandenpoel2004predicting" role="doc-biblioref">Van den Poel and Buckinx 2004</a>)</span>. While our model is relatively simple, more complex approaches such as neural networks have been shown to further improve predictive performance in similar contexts <span class="citation" data-cites="sakar2018real">(<a href="#ref-sakar2018real" role="doc-biblioref">Sakar et al. 2018</a>)</span>.</p>
 </section>
+<section id="references" class="level1 unnumbered">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-awad2012prediction" class="csl-entry" role="listitem">
+Awad, MA, and I Khalil. 2012. <span>“Prediction of User’s Web-Browsing Behavior: Application of Markov Model.”</span> <em>IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics)</em> 42 (4): 1131–42.
+</div>
+<div id="ref-carmona2012web" class="csl-entry" role="listitem">
+Carmona, CJ et al. 2012. <span>“Web Usage Mining to Improve the Design of an e-Commerce Website: OrOliveSur.com.”</span> <em>Expert Systems with Applications</em> 39 (12): 11243–49.
+</div>
+<div id="ref-sakar2018real" class="csl-entry" role="listitem">
+Sakar, CO et al. 2018. <span>“Real-Time Prediction of Online Shoppers’ Purchasing Intention Using Multilayer Perceptron and LSTM Recurrent Neural Networks.”</span> <em>Neural Computing and Applications</em> 31: 6893–6908.
+</div>
+<div id="ref-vandenpoel2004predicting" class="csl-entry" role="listitem">
+Van den Poel, D, and W Buckinx. 2004. <span>“Predicting Online-Purchasing Behaviour.”</span> <em>European Journal of Operational Research</em> 166 (2): 557–75.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
