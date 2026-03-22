@@ -5,7 +5,7 @@
 
 # --- Variables ---
 # Use flexible Docker image
-IMAGE_NAME ?= quarto-env
+IMAGE_NAME = quarto-env
 DOCKER_RUN = docker run --rm -v "$(shell pwd):/app" -w /app $(IMAGE_NAME)
 CONDA_EXEC = conda run --no-capture-output -n dsci-310-team2
 
