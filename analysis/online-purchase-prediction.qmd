@@ -1,6 +1,14 @@
 ---
-title: Predicting Online Purchase Behaviour from Website Engagement
-jupyter: python3
+title: "Predicting Online Shopping Purchase Behavior"
+author: "Group 2: Aidan Aimy, Adrian Chan, Yujia Huang, Renata Lovette"
+format:
+  html:
+    toc: true
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
 ---
 
 >**DSCI 310, Group 2**
@@ -17,6 +25,7 @@ Understanding these relationships may help businesses better understand online c
 E-commerce platforms collect large amounts of behavioural data about how users interact with websites. Metrics such as the number of pages visited, time spent browsing products, and bounce rates can provide insight into customer engagement and purchase intent. Understanding which behavioural signals are associated with successful purchases can help businesses improve their online shopping experience.
 
 In this project, we analyze user session data from an e-commerce website to investigate whether engagement metrics can predict whether a visitor completes a purchase.
+
 
 ### Research Question
 
@@ -47,217 +56,61 @@ The target variable for this project is **Revenue**, which indicates whether a v
 
 # Methods
 
-```{python}
-# libraries
-import pandas as pd
-import numpy as np
-import matplotlib as plt
-import seaborn as sns
-import sklearn
+### Data 
 
-#removes warnings
-import warnings
-warnings.filterwarnings('ignore')
-```
+The dataset used in this project is the Online Shoppers Purchasing Intention Dataset. Data were first loaded and saved locally using a data ingestion script, followed by a cleaning step that standardized column names and removed duplicate rows.
 
-## Data Loading
-In this section, we load the dataset and inspect its structure.
+The cleaned dataset is used for all subsequent analysis.
 
 ```{python}
-# load dataset
-df = pd.read_csv('/app/data/online_shoppers_data.csv')
-print("Original shape:", df.shape)
-```
-
-## Data Cleaning and Preparation
-Before performing analysis, the dataset may require preprocessing steps such as:
-
-- Checking for missing values
-- Converting categorical variables to appropriate formats
-- Preparing features for modeling
-
-```{python}
-# Check for missing values
-missing_values = df.isnull().sum()
-print("Missing values:\n", missing_values)
-
-# Drop rows with missing values
-df_cleaned = df.dropna()
-print("Shape after dropping missing values:", df_cleaned.shape)
-
-# Remove duplicates
-df_cleaned = df_cleaned.drop_duplicates()
-print("Shape after dropping duplicates:", df_cleaned.shape)
-#There is no missing values or duplicates in the dataset, so the shape remains unchanged.
-
-# Check data types
-print("\nData types:")
-print(df.dtypes)
-```
-
-```{python}
-# column names
-print(df.columns)
-```
-
-```{python}
-# Convert categorical data to numeric
+#| label: tbl-overview
+#| tbl-cap: "Summary of dataset features and data quality"
+#| tbl: true
 import pandas as pd
 
-# Convert VisitorType to numeric
-visitor_map = {
-    "Returning_Visitor": 2,
-    "New_Visitor": 1,
-    "Other": 0
-}
-df["VisitorType"] = df["VisitorType"].map(visitor_map)
-
-# Convert Month to numeric
-month_map = {
-    "Jan":1, "Feb":2, "Mar":3, "Apr":4,
-    "May":5, "June":6, "Jul":7, "Aug":8,
-    "Sep":9, "Oct":10, "Nov":11, "Dec":12
-}
-df["Month"] = df["Month"].map(month_map)
-
-# Check result
-
-print("\nData types:")
-print(df.dtypes)
-```
-
-```{python}
-# Check for impossible values
-
-# Check that count variables are not negative
-count_cols = [
-    "Administrative",
-    "Informational",
-    "ProductRelated"
-]
-
-for col in count_cols:
-    if (df[col] < 0).any():
-        print(f"Warning: {col} contains negative values")
-
-# Check that duration variables are not negative
-duration_cols = [
-    "Administrative_Duration",
-    "Informational_Duration",
-    "ProductRelated_Duration"
-]
-
-for col in duration_cols:
-    if (df[col] < 0).any():
-        print(f"Warning: {col} contains negative values")
-
-# Check rate variables (should be between 0 and 1)
-rate_cols = [
-    "BounceRates",
-    "ExitRates",
-    "SpecialDay"
-]
-
-for col in rate_cols:
-    if ((df[col] < 0) | (df[col] > 1)).any():
-        print(f"Warning: {col} contains values outside [0,1]")
-
-# PageValues should not be negative
-if (df["PageValues"] < 0).any():
-    print("Warning: PageValues contains negative values")
-
-# Binary variables should only be 0 or 1
-binary_cols = ["Weekend", "Revenue"]
-
-for col in binary_cols:
-    if not df[col].isin([0, 1]).all():
-        print(f"Warning: {col} contains values other than 0 or 1")
-
-print("Impossible value checks complete.")
-```
-
-```{python}
-categorical_cols = [
-    "Month",
-    "OperatingSystems",
-    "Browser",
-    "Region",
-    "TrafficType",
-    "VisitorType"
-]
-
-for col in categorical_cols:
-    print(f"\nUnique values in {col}:")
-    print(sorted([x.item() for x in df[col].unique()]))
-```
-
-```{python}
-# Save cleaned data
-df.to_csv('/app/data/shopping_data_cleaned.csv', index=False)
-
-print("\nCleaned dataset saved.")
-print("Final shape:", df.shape)
+df = pd.read_csv("/app/data/shopping_data_cleaned.csv")
+df.head()
 ```
 
 ## Exploratory Data Analysis
 
 Exploratory data analysis (EDA) helps us understand the distribution of variables and potential relationships between website engagement metrics and purchasing behaviour.
 
-In this section, we will generate summary statistics and visualizations to explore different features of the dataset to understand the differences between sessions that resulted in purchases and those that did not. This section will focus on the following:
 
-- Distribution of `Revenue`
-- Distribution of page visits (`Administrative`, `Informational`, `ProductRelated`)
-- Time spent on different types of pages (`Administrative_Duration`, `Informational_Duration`, `ProductRelated_Duration`)
-- `BounceRates` and `ExitRates`
+### Revenue Distribution
 
 ```{python}
-df.head()
+#| label: tbl-revenue
+#| tbl-cap: "Distribution of purchasing outcomes"
+
+pd.read_csv("/app/results/eda_revenue_count.csv")
 ```
 
-### Revenue
-> How many visits resulted in a purchase? Do returning or new customers make more purchases?
-
+As shown in @tbl-revenue, most sessions did not result in purchases, indicating a class imbalance.
+ 
+### Revenue by Visitor Type
 ```{python}
-# count of page visits per page type
-rev_count = df['Revenue'].value_counts()
-rev_count
+#| label: fig-visitor
+#| fig-cap: "Revenue distribution by visitor type"
+
+from IPython.display import Image
+Image("/app/results/eda_revenue_by_visitor_type.png")
 ```
 
-```{python}
-# revenue distribution among different customer types
-rev_count_customer = df.groupby('VisitorType')['Revenue'].value_counts()
-rev_count_customer
-```
+Figure @fig-visitor shows that returning visitors contribute more to purchases compared to new visitors.
 
-### Comparing Page Visits
-> Which pages have the most traction? Is there a difference in page visits that result in revenue and the ones that don't? Are there behavioural differences between returning and new customers?
-
-```{python}
-# Page visits vs Revenue
-page_columns = ['Administrative', 'Administrative_Duration', 'Informational', 'Informational_Duration',
-                'ProductRelated', 'ProductRelated_Duration']
-visits_vs_revenue = df.groupby('Revenue')[page_columns].mean()
-
-visits_vs_revenue
-```
-
-```{python}
-# Page visits vs customer type
-visits_vs_customer = df.groupby('VisitorType')[page_columns].mean()
-
-visits_vs_customer
-```
 
 ### Correlation Map of features
 
 ```{python}
-feature_correlation = df.corr()
+#| label: fig-correlation
+#| fig-cap: "Correlation heatmap of engagement metrics"
 
-plt.pyplot.figure(figsize=(10, 8))
-sns.heatmap(feature_correlation, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
-plt.pyplot.title("Online Shoppers Intention Correlation Heatmap")
-plt.pyplot.show()
+from IPython.display import Image
+Image("/app/results/eda_correlation_heatmap.png")
 ```
+
+As shown in @fig-correlation, several engagement features are moderately correlated, suggesting potential predictive relationships.
 
 ## Classification Model
 
@@ -265,26 +118,7 @@ Because the target variable **Revenue** indicates whether a purchase occurred (T
 
 We will train a logistic regression model using website engagement metrics to predict whether a visitor completes a purchase. We chose a logistic regression model because it is well suited for a binary classification problem. We begin by splitting the dataset into training and testing data using an 80/20 ratio. Then we standardized our data using `StandardScaler()` to prevent variables of greater magnitude from having a disproportionate influence on the model before fitting it the `LogisticRegression` model from the Scikit-Learn library.
 
-```{python}
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import StandardScaler
-
-X = df.drop('Revenue', axis=1)
-y = df['Revenue']
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
-)
-
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-model = LogisticRegression(max_iter=1000, random_state=42)
-model.fit(X_train_scaled, y_train)
-```
-
+ 
 ## Model Evaluation
 
 To evaluate the performance of the classification model, we will use metrics such as:
@@ -295,56 +129,13 @@ To evaluate the performance of the classification model, we will use metrics suc
 These metrics will help assess how well the model predicts purchasing behaviour.
 
 ```{python}
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+#| label: fig-confusion
+#| fig-cap: "Confusion matrix for logistic regression model"
 
-score = model.score(X_test_scaled, y_test)
-y_pred = model.predict(X_test_scaled)
-
-print(f"The overall accuracy score of our logistic regression model is approximately {round(score, 3)}")
-cm = confusion_matrix(y_test, y_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Not Purchased", "Purchased"])
-
-disp.plot()
-plt.pyplot.show()
+from IPython.display import Image
+Image("/app/results/model_confusion_matrix.png")
 ```
 
-## Class Weighting Model
-
-One limitation of the initial logistic regression model is that the dataset is imbalanced: the number of sessions that did not result in a purchase is much larger than the number of sessions that did. As a result, the model tends to predict the majority class (“No Purchase”) more often, which leads to a high overall accuracy but relatively low recall for the purchase class. In other words, the model fails to correctly identify many visitors who actually complete a purchase.
-
-To address this issue, we implemented class weighting in the logistic regression model by setting `class_weight="balanced"`. This approach automatically adjusts the importance of each class during model training. Misclassifying the minority class (purchasers) is penalized more heavily than misclassifying the majority class (non-purchasers). As a result, the model is encouraged to pay greater attention to patterns associated with purchase behaviour.
-
-```{python}
-weighted_model = LogisticRegression(
-    max_iter=1000,
-    random_state=42,
-    class_weight='balanced'
-)
-
-weighted_model.fit(X_train_scaled, y_train)
-```
-
-## Model Evaluation for Class Weighting Model
-To evaluate the performance of the re-weighted classification model, we will use the same metrics as before:
-
-- Accuracy
-- Confusion matrix
-
-These metrics will help assess how well the model predicts purchasing behaviour.
-
-```{python}
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-
-score = weighted_model.score(X_test_scaled, y_test)
-y_pred = weighted_model.predict(X_test_scaled)
-
-print(f"The overall accuracy score of our weighted logistic regression model is approximately {round(score, 3)}")
-cm = confusion_matrix(y_test, y_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["Not Purchased", "Purchased"])
-
-disp.plot()
-plt.pyplot.show()
-```
 
 # Discussion
 
