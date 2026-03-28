@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
+from src.data_splitting import split_data
 
 def save_table(df: pd.DataFrame, path: str) -> None: 
     """
@@ -22,18 +23,8 @@ def create_model_and_results(data_path: str, output_prefix: str) -> None:
     # 1. Load cleaned dataset
     df = pd.read_csv(data_path)
     
-    # 2. FIX: Select only numeric columns so the Scaler doesn't hit strings like 'Nov'
-    X = df.select_dtypes(include=['number'])
-    
-    # 3. FIX: Ensure 'revenue' is the target and not part of the features (X)
-    if 'revenue' in X.columns:
-        X = X.drop('revenue', axis=1)
-    y = df['revenue']
-
-    # Split dataset 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42, stratify=y
-    )
+    # Split dataset using function
+    X_train, X_test, y_train, y_test = split_datad(df, 'revenue')
 
     # Scale data 
     scaler = StandardScaler()
