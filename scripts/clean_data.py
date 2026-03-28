@@ -1,11 +1,13 @@
 import argparse
 import pandas as pd
 
+from src.data_cleaning import standardize_column_names
+
+
 def clean_data(input_path, output_path):
     df = pd.read_csv(input_path)
 
-    df.columns = df.columns.str.lower().str.replace(" ", "_")
-
+    df = standardize_column_names(df)
     df = df.drop_duplicates()
 
     df.to_csv(output_path, index=False)

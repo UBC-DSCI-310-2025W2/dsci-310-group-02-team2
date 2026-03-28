@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 from pathlib import Path
 
+from src.eda_helpers import create_feature_overview
+
 def save_table(df: pd.DataFrame, path: str) -> None: 
     """
     Save table (pandas dataframe) into CSV file
@@ -25,14 +27,8 @@ def init_eda(data_path: str, output_prefix: str) -> None:
     ouput_prefix_path = Path(output_prefix)
     ouput_prefix_path.parent.mkdir(parents=True, exist_ok=True)
 
-    #Basic dataset overview 
-    overview = pd.DataFrame({
-        "Features": df.columns,
-        "Data Types": df.dtypes.astype(str).values, 
-        "Non-null Values": df.notnull().sum().values, 
-        "Missing Values": df.isnull().sum().values, 
-        "Unique Values": df.nunique().values
-    })
+    # Basic dataset overview
+    overview = create_feature_overview(df)
     save_table(overview, f"{output_prefix}_overview.csv")
 
     #revenue count: 
