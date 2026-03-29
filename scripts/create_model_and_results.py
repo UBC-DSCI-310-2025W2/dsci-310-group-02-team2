@@ -24,7 +24,7 @@ def create_model_and_results(data_path: str, output_prefix: str) -> None:
     df = pd.read_csv(data_path)
     
     # Split dataset using function
-    X_train, X_test, y_train, y_test = split_datad(df, 'revenue')
+    X_train, X_test, y_train, y_test = split_data(df, 'revenue')
 
     # Scale data 
     scaler = StandardScaler()

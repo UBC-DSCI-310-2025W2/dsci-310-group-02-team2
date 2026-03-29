@@ -25,3 +25,4 @@ def test_standardize_column_names_basic():
         "ProductRelated",
         "  Special Day ",
     ]
+
