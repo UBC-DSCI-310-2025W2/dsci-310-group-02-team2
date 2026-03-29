@@ -13,7 +13,8 @@ def split_data(df, target_variable):
         target_variable: single target variable
 
     Returns:
-        4 datasets: X_train, X_test, y_train, y_test
+        2 datasets: X_train, X_test
+        2 series: y_train, y_test
     """
     y = df[target_variable]
     X = df.drop(columns=target_variable).select_dtypes(include='number')

@@ -7,6 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 from src.data_splitting import split_data
+from src.scale_features import scale_features
 
 def save_table(df: pd.DataFrame, path: str) -> None: 
     """
@@ -26,10 +27,8 @@ def create_model_and_results(data_path: str, output_prefix: str) -> None:
     # Split dataset using function
     X_train, X_test, y_train, y_test = split_data(df, 'revenue')
 
-    # Scale data 
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
+    # Scale data using function 
+    X_train_scaled, X_test_scaled = scale_features(X_train, X_test)
 
     # Create and fit model
     model = LogisticRegression(max_iter=1000, random_state=42)
