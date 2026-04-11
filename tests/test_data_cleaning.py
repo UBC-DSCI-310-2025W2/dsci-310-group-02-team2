@@ -1,9 +1,11 @@
 import pandas as pd
+import pytest
 
 from src.data_cleaning import standardize_column_names
 
 
 def test_standardize_column_names_basic():
+    """Test that column names are standardized and original DataFrame is unchanged."""
     df = pd.DataFrame(
         {
             "Administrative Duration": [1, 2],
@@ -25,4 +27,10 @@ def test_standardize_column_names_basic():
         "ProductRelated",
         "  Special Day ",
     ]
+
+
+def test_standardize_column_names_type_error():
+    """Test that function raises TypeError when input is not a DataFrame."""
+    with pytest.raises(TypeError):
+        standardize_column_names([1, 2, 3])
 

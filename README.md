@@ -165,7 +165,7 @@ Individual scripts can be run separately:
 # Project Structure
 
 ```
-dsci-310-group-02-team2/
+ dsci-310-group-02-team2/
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
 ├── Dockerfile
@@ -177,8 +177,8 @@ dsci-310-group-02-team2/
 │   ├── online-purchase-prediction.qmd
 │   ├── references.bib
 │   └── online-purchase-prediction_files/
-│       ├── figure-html/
-│       └── libs/
+│   ├── figure-html/
+│   └── libs/
 ├── conda-lock.yml
 ├── environment.yml
 ├── data/
@@ -187,12 +187,20 @@ dsci-310-group-02-team2/
 ├── results/
 │   ├── eda_overview.csv
 │   ├── eda_revenue_count.csv
+│   ├── eda_correlation_heatmap.png
+│   ├── model_confusion_matrix.png
 │   └── model_classification_report.csv
-└── scripts/
-    ├── clean_data.py
-    ├── create_model_and_results.py
-    ├── init_eda.py
-    └── load_data.py
+├── scripts/
+│   ├── clean_data.py
+│   ├── create_model_and_results.py
+│   ├── init_eda.py
+│   └── load_data.py
+└── tests/
+    ├── test_data_cleaning.py
+    ├── test_data_splitting.py
+    ├── test_eda_helpers.py
+    └── test_model_helpers_scaling.py
+
 ```
 
 ---
@@ -207,13 +215,16 @@ This project requires the following software and Python libraries:
   - Quarto (for rendering the analysis document)
 
 - **Python Libraries (from environment.yml):**
-  - Python 3.11
-  - numpy 2.3.5
-  - pandas 2.3.3
-  - scikit-learn 1.8.0
-  - matplotlib 3.10.8
-  - seaborn 0.13.2
-  - jupyter 1.1.1
+- Python 3.11
+- numpy 2.3.5
+- pandas 2.3.3
+- scikit-learn 1.8.0
+- scipy 1.17.1
+- statsmodels 0.14.6
+- matplotlib 3.10.8
+- seaborn 0.13.2
+- jupyter 1.1.1
+- pytest 9.0.3
 
 These dependencies will be automatically installed when building the Docker container.
 

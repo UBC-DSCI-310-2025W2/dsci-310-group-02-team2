@@ -7,13 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 from src.data_splitting import split_data
-from src.scale_features import scale_features
-
-def save_table(df: pd.DataFrame, path: str) -> None: 
-    """
-    Save table (pandas dataframe) into CSV file
-    """
-    df.to_csv(path, index=True)
+from src.model_helpers_scaling import scale_features
 
 def create_model_and_results(data_path: str, output_prefix: str) -> None:
     """
@@ -54,7 +48,7 @@ def create_model_and_results(data_path: str, output_prefix: str) -> None:
     # Classification report
     cr = classification_report(y_test, y_pred, output_dict=True)
     cr_df = pd.DataFrame(cr).transpose()
-    save_table(cr_df, f"{output_prefix}_classification_report.csv")
+    cr_df.to_csv(f"{output_prefix}_classification_report.csv", index=True)
     print(f"Model results saved to {output_prefix}...")
 
 if __name__ == "__main__":
