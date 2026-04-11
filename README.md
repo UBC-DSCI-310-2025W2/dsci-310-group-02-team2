@@ -165,6 +165,43 @@ Individual scripts can be run separately:
 # Project Structure
 
 ```
+ dsci-310-group-02-team2/
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── Dockerfile
+├── LICENSE.md
+├── Makefile
+├── README.md
+├── analysis/
+│   ├── online-purchase-prediction.html
+│   ├── online-purchase-prediction.qmd
+│   ├── references.bib
+│   └── online-purchase-prediction_files/
+│   ├── figure-html/
+│   └── libs/
+├── conda-lock.yml
+├── environment.yml
+├── data/
+│   ├── online_shoppers_data.csv
+│   └── shopping_data_cleaned.csv
+├── results/
+│   ├── eda_overview.csv
+│   ├── eda_revenue_count.csv
+│   ├── eda_correlation_heatmap.png
+│   ├── model_confusion_matrix.png
+│   └── model_classification_report.csv
+├── scripts/
+│   ├── clean_data.py
+│   ├── create_model_and_results.py
+│   ├── init_eda.py
+│   └── load_data.py
+└── tests/
+    ├── test_data_cleaning.py
+    ├── test_data_splitting.py
+    ├── test_eda_helpers.py
+    └── test_model_helpers_scaling.py
+
+
 dsci-310-group-02-team2/
 ├── CODE_OF_CONDUCT.md
 ├── CONTRIBUTING.md
@@ -193,6 +230,8 @@ dsci-310-group-02-team2/
     ├── create_model_and_results.py
     ├── init_eda.py
     └── load_data.py
+
+
 ```
 
 ---
