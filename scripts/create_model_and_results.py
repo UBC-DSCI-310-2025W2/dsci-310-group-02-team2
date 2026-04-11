@@ -6,8 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
-from src.data_splitting import split_data
-from src.model_helpers_scaling import scale_features
+from logreg_project_prep.split_data import split_data
+from logreg_project_prep.scaling_helpers import scale_features
+
+def save_table(df: pd.DataFrame, path: str) -> None: 
+    """
+    Save table (pandas dataframe) into CSV file
+    """
+    df.to_csv(path, index=True)
 
 def create_model_and_results(data_path: str, output_prefix: str) -> None:
     """
