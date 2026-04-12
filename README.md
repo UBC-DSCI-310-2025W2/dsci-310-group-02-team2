@@ -195,16 +195,11 @@ Individual scripts can be run separately:
 │   ├── model_confusion_matrix.png
 │   └── model_classification_report.csv
 ├── scripts/
-│   ├── 01_load_data.py
-│   ├── 02_clean_data.py
-│   ├── 03_init_eda.py
-│   └── 04_create_model_and_results.py
-└── tests/
-    ├── test_data_cleaning.py
-    ├── test_data_splitting.py
-    ├── test_eda_helpers.py
-    └── test_model_helpers_scaling.py
-
+    ├── 01_load_data.py
+    ├── 02_clean_data.py
+    ├── 03_init_eda.py
+    └── 04_create_model_and_results.py
+ 
 ```
 
 ---
