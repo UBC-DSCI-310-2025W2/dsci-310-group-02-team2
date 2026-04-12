@@ -146,7 +146,7 @@ This will:
 - Build and evaluate the logistic regression model, saving confusion matrix and classification report to `results/`
 - Render the Quarto report to `analysis/online-purchase-prediction.html`
 
-To view the final report, open `online-purchase-prediction.html` through local path in your browser.
+To view the final report, open `online-purchase-prediction.html` through path (analysis/online-purchase-prediction.html) in your browser.
 
 ### Project Structure
 
