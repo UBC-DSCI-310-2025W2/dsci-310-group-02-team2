@@ -9,9 +9,8 @@ from sklearn.metrics import (
     accuracy_score
 )
 
-from src.data_splitting import split_data
-from src.model_helpers_scaling import scale_features
-
+from logreg_project_prep.split_data import split_data
+from logreg_project_prep.scaling_helpers import scale_features
 
 def create_model_and_results(data_path: str, output_prefix: str) -> None:
     """

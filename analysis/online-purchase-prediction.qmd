@@ -15,10 +15,6 @@ bibliography: references.bib
 Authors: Aidan Aimy, Adrian Chan, Yujia Huang, Renata Lovette
 
 # Summary
-<<<<<<< HEAD
-=======
-
->>>>>>> adf6e8e (report reproducible)
 This project investigates whether website engagement metrics can predict whether an online visitor will complete a purchase on an e-commerce website. Specifically, we will examine behavioural indicators such as the number of pages visited, time spent on different types of pages, and engagement metrics such as bounce rate and exit rate.
 
 Using the **Online Shoppers Purchasing Intention Dataset**, we perform exploratory data analysis and build a classification model to determine whether browsing behaviour can predict whether a visitor will generate revenue for the website.
