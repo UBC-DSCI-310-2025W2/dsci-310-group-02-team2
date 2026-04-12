@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 from pathlib import Path
 
-from src.eda_helpers import create_feature_overview
+from logreg_project_prep.eda_helpers import create_feature_overview
 
 def save_table(df: pd.DataFrame, path: str) -> None: 
     """

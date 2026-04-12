@@ -9,7 +9,7 @@ DOCKER_RUN = docker run --rm -v "$(shell pwd):/app" -w /app $(IMAGE_NAME)
 CONDA_EXEC = conda run --no-capture-output -n dsci-310-team2
 
 # --- .PHONY Targets ---
-.PHONY: all clean data_processing eda modeling report
+.PHONY: all clean data_processing validate eda modeling report
 
 # --- Main Target ---
 all: report
@@ -22,13 +22,22 @@ data/shopping_data_cleaned.csv: data/online_shoppers_data.csv scripts/02_clean_d
 		data/online_shoppers_data.csv \
 		data/shopping_data_cleaned.csv"
 
+# --- 1.5. Data Validation ---
+# Validates the cleaned data
+validate: .validated
+
+.validated: data/shopping_data_cleaned.csv scripts/validate_data.py
+	$(DOCKER_RUN) $(CONDA_EXEC) python scripts/validate_data.py \
+		data/shopping_data_cleaned.csv
+	touch .validated
+
 # --- 2. Exploratory Data Analysis (EDA) ---
 eda: results/eda_correlation_heatmap.png
 
 results/eda_correlation_heatmap.png: data/shopping_data_cleaned.csv scripts/03_init_eda.py
 	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/03_init_eda.py \
 		data/shopping_data_cleaned.csv \
-		results/eda"
+		results/eda
 
 # --- 3. Modeling ---
 modeling: results/model_confusion_matrix.png
@@ -36,7 +45,7 @@ modeling: results/model_confusion_matrix.png
 results/model_confusion_matrix.png: data/shopping_data_cleaned.csv scripts/04_create_model_and_results.py
 	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/04_create_model_and_results.py \
 		data/shopping_data_cleaned.csv \
-		results/model"
+		results/model
 
 # --- 4. Final Report ---
 report: online-purchase-prediction.html
@@ -52,3 +61,4 @@ clean:
 	rm -f results/*
 	rm -f online-purchase-prediction.html
 	rm -rf analysis/online-purchase-prediction_files
+	rm -f .validated
