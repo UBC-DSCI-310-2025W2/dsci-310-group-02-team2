@@ -198,7 +198,9 @@ Individual scripts can be run separately:
     ├── 01_load_data.py
     ├── 02_clean_data.py
     ├── 03_init_eda.py
-    └── 04_create_model_and_results.py
+    ├── 04_create_model_and_results.py
+    ├── validate_data.py
+    └──__init__.py
  
 ```
 
