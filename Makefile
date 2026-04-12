@@ -8,7 +8,7 @@ IMAGE_NAME = quarto-env
 DOCKER_RUN = docker run --rm -v "$(shell pwd):/app" -w /app $(IMAGE_NAME)
 CONDA_EXEC = conda run --no-capture-output -n dsci-310-team2
 
-# --- .PHONY Targets ---
+# --- PHONY Targets ---
 .PHONY: all clean data_processing validate eda modeling report
 
 # --- Main Target ---
@@ -18,42 +18,32 @@ all: report
 data_processing: data/shopping_data_cleaned.csv
 
 data/shopping_data_cleaned.csv: data/online_shoppers_data.csv scripts/02_clean_data.py
-	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/02_clean_data.py \
-		data/online_shoppers_data.csv \
-		data/shopping_data_cleaned.csv"
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/02_clean_data.py data/online_shoppers_data.csv data/shopping_data_cleaned.csv"
 
 # --- 1.5. Data Validation ---
-# Validates the cleaned data
 validate: .validated
 
 .validated: data/shopping_data_cleaned.csv scripts/validate_data.py
-	$(DOCKER_RUN) $(CONDA_EXEC) python scripts/validate_data.py \
-		data/shopping_data_cleaned.csv
+	$(DOCKER_RUN) $(CONDA_EXEC) python scripts/validate_data.py data/shopping_data_cleaned.csv
 	touch .validated
 
 # --- 2. Exploratory Data Analysis (EDA) ---
 eda: results/eda_correlation_heatmap.png
 
 results/eda_correlation_heatmap.png: data/shopping_data_cleaned.csv scripts/03_init_eda.py
-	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/03_init_eda.py \
-		data/shopping_data_cleaned.csv \
-		results/eda
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/03_init_eda.py data/shopping_data_cleaned.csv results/eda"
 
 # --- 3. Modeling ---
 modeling: results/model_confusion_matrix.png
 
 results/model_confusion_matrix.png: data/shopping_data_cleaned.csv scripts/04_create_model_and_results.py
-	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/04_create_model_and_results.py \
-		data/shopping_data_cleaned.csv \
-		results/model
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/04_create_model_and_results.py data/shopping_data_cleaned.csv results/model"
 
 # --- 4. Final Report ---
 report: online-purchase-prediction.html
 
 online-purchase-prediction.html: analysis/online-purchase-prediction.qmd eda modeling
-	$(DOCKER_RUN) $(CONDA_EXEC) quarto render analysis/online-purchase-prediction.qmd \
-		--to html \
-		--output-dir .
+	$(DOCKER_RUN) $(CONDA_EXEC) quarto render analysis/online-purchase-prediction.qmd --to html --output-dir .
 
 # --- 5. Cleaning ---
 clean:
