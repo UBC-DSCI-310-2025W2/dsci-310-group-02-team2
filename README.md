@@ -142,7 +142,8 @@ make all
 
 This will:
 - Clean the raw data (`data/online_shoppers_data.csv`) and save to `data/shopping_data_cleaned.csv`
-- Perform exploratory data analysis and save plots/results to `results/`
+- Compute data validation for the cleaned dataset (`data/shopping_data_cleaned.csv`)
+- Once validated, perform exploratory data analysis and save plots/results to `results/`
 - Build and evaluate the logistic regression model, saving confusion matrix and classification report to `results/`
 - Render the Quarto report to `analysis/online-purchase-prediction.html`
 
@@ -163,6 +164,7 @@ To view the final report, open `online-purchase-prediction.html` through path (a
 Individual scripts can be run separately:
 
 - `python scripts/02_clean_data.py data/online_shoppers_data.csv data/shopping_data_cleaned.csv`
+- `python scripts/validate_data.py data/shopping_data_cleaned.csv`
 - `python scripts/03_init_eda.py data/shopping_data_cleaned.csv results/eda`
 - `python scripts/04_create_model_and_results.py data/shopping_data_cleaned.csv results/model`
 
