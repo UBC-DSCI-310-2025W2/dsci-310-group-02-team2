@@ -165,7 +165,7 @@ div.csl-indent {
 <p>The dataset used in this project is the Online Shoppers Purchasing Intention Dataset. Data were first loaded and saved locally using a data ingestion script, followed by a cleaning step that standardized column names and removed duplicate rows.</p>
 <p>The cleaned dataset is used for all subsequent analysis.</p>
 <div class="cell" data-tbl="true" data-execution_count="1">
-<div id="tbl-overview" class="cell quarto-float anchored" data-tbl="true" data-execution_count="1">
+<div id="tbl-overview" class="cell quarto-float anchored" data-execution_count="1" data-tbl="true">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-overview-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Summary of dataset features and data quality
@@ -437,8 +437,15 @@ Figure&nbsp;3: Confusion matrix for logistic regression model
 <section id="discussion" class="level1">
 <h1>Discussion</h1>
 <p>In this project, we investigated whether website engagement metrics can be used to predict whether an online visitor completes a purchase. We explored patterns in browsing behaviour and used a logistic regression classification model to determine whether behavioural indicators such as page visits, browsing duration, and bounce rates could predict purchasing outcomes.</p>
+<<<<<<< HEAD
 <p>The initial model achieved an overall accuracy of approximately 0.885 on the test dataset. The confusion matrix shows that the model correctly classified a large majority of non-purchasing visitors (2017 true negatives) while making relatively few false positive predictions (42). This suggests that the model is effective at identifying users who are unlikely to complete a purchase.</p>
 <p>However, the model performs less effectively when identifying actual purchasers. Out of 382 visitors who made a purchase, only 143 were correctly classified, while 239 were misclassified as non-purchasers. This corresponds to a relatively low recall for the purchase class. In practical terms, the model tends to be conservative and predicts “Not Purchased” more frequently, which likely reflects the imbalance in the dataset where non-purchasing visitors are much more common.</p>
+=======
+<p>The initial model achieved an overall accuracy of approximately 0.885 on the test dataset.</p>
+<p>The confusion matrix shows that the model correctly classified a large majority of non-purchasing visitors (2017 true negatives) while making relatively few false positive predictions (42). This suggests that the model is effective at identifying users who are unlikely to complete a purchase.</p>
+<p>However, the model performs less effectively when identifying actual purchasers. Out of 382 visitors who made a purchase, only 143 were correctly classified, while 239 were misclassified as non-purchasers. This corresponds to a relatively low recall for the purchase class.</p>
+<p>In practical terms, the model tends to be conservative and predicts “Not Purchased” more frequently, which likely reflects the imbalance in the dataset where non-purchasing visitors are much more common.</p>
+>>>>>>> adf6e8e (report reproducible)
 <p>Despite this limitation, the results demonstrate that behavioural engagement metrics contain meaningful predictive information about purchase intent. Features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model.</p>
 <p>Our findings are consistent with prior research showing that behavioural engagement metrics are useful predictors of purchasing intent <span class="citation" data-cites="vandenpoel2004predicting">(<a href="#ref-vandenpoel2004predicting" role="doc-biblioref">Van den Poel and Buckinx 2004</a>)</span>. While our model is relatively simple, more complex approaches such as neural networks have been shown to further improve predictive performance in similar contexts <span class="citation" data-cites="sakar2018real">(<a href="#ref-sakar2018real" role="doc-biblioref">Sakar et al. 2018</a>)</span>.</p>
 </section>
