@@ -126,6 +126,10 @@ This project emphasizes reproducible data science practices using version contro
    docker build -t quarto-env .
    ```
 
+4. To deactivate the Conda environment when you are finished working on the project:
+   ```bash
+   conda deactivate
+   ```
 ### Running the Analysis
 
 The analysis is implemented in `analysis/online-purchase-prediction.qmd`, a Quarto document that combines code, narrative, and visualizations.
@@ -158,9 +162,9 @@ To view the final report, open `online-purchase-prediction.html` through local p
 
 Individual scripts can be run separately:
 
-- `python scripts/clean_data.py data/online_shoppers_data.csv data/shopping_data_cleaned.csv`
-- `python scripts/init_eda.py data/shopping_data_cleaned.csv results/eda`
-- `python scripts/create_model_and_results.py data/shopping_data_cleaned.csv results/model`
+- `python scripts/02_clean_data.py data/online_shoppers_data.csv data/shopping_data_cleaned.csv`
+- `python scripts/03_init_eda.py data/shopping_data_cleaned.csv results/eda`
+- `python scripts/04_create_model_and_results.py data/shopping_data_cleaned.csv results/model`
 
 # Project Structure
 
@@ -191,10 +195,10 @@ Individual scripts can be run separately:
 │   ├── model_confusion_matrix.png
 │   └── model_classification_report.csv
 ├── scripts/
-│   ├── clean_data.py
-│   ├── create_model_and_results.py
-│   ├── init_eda.py
-│   └── load_data.py
+│   ├── 01_load_data.py
+│   ├── 02_clean_data.py
+│   ├── 03_init_eda.py
+│   └── 04_create_model_and_results.py
 └── tests/
     ├── test_data_cleaning.py
     ├── test_data_splitting.py

@@ -14,6 +14,7 @@ bibliography: references.bib
 >**DSCI 310, Group 2**
 Authors: Aidan Aimy, Adrian Chan, Yujia Huang, Renata Lovette
 
+# Summary
 This project investigates whether website engagement metrics can predict whether an online visitor will complete a purchase on an e-commerce website. Specifically, we will examine behavioural indicators such as the number of pages visited, time spent on different types of pages, and engagement metrics such as bounce rate and exit rate.
 
 Using the **Online Shoppers Purchasing Intention Dataset**, we perform exploratory data analysis and build a classification model to determine whether browsing behaviour can predict whether a visitor will generate revenue for the website.
@@ -140,11 +141,31 @@ Image("/app/results/model_confusion_matrix.png")
 
 # Discussion
 
+```{python}
+# Load model metrics saved from script
+import pandas as pd
+
+metrics = pd.read_csv("../results/model_metrics.csv")
+
+accuracy = float(metrics["accuracy"].iloc[0])
+tn = int(metrics["true_negative"].iloc[0])
+fp = int(metrics["false_positive"].iloc[0])
+fn = int(metrics["false_negative"].iloc[0])
+tp = int(metrics["true_positive"].iloc[0])
+
+globals().update({
+    "accuracy": accuracy,
+    "tn": tn,
+    "fp": fp,
+    "fn": fn,
+    "tp": tp
+})
+```
 In this project, we investigated whether website engagement metrics can be used to predict whether an online visitor completes a purchase. We explored patterns in browsing behaviour and used a logistic regression classification model to determine whether behavioural indicators such as page visits, browsing duration, and bounce rates could predict purchasing outcomes.
 
-The initial model achieved an overall accuracy of approximately 0.878 on the test dataset. The confusion matrix shows that the model correctly classified a large majority of non-purchasing visitors (2035 true negatives) while making relatively few false positive predictions (49). This suggests that the model is effective at identifying users who are unlikely to complete a purchase.
+The initial model achieved an overall accuracy of approximately `{python} f"{accuracy:.3f}"` on the test dataset. The confusion matrix shows that the model correctly classified a large majority of non-purchasing visitors (`{python} tn` true negatives) while making relatively few false positive predictions (`{python} fp`). This suggests that the model is effective at identifying users who are unlikely to complete a purchase.
 
-However, the model performs less effectively when identifying actual purchasers. Out of 382 visitors who made a purchase, only 130 were correctly classified, while 252 were misclassified as non-purchasers. This corresponds to a relatively low recall for the purchase class. In practical terms, the model tends to be conservative and predicts “Not Purchased” more frequently, which likely reflects the imbalance in the dataset where non-purchasing visitors are much more common.
+However, the model performs less effectively when identifying actual purchasers. Out of `{python} tp + fn` visitors who made a purchase, only `{python} tp` were correctly classified, while `{python} fn` were misclassified as non-purchasers. This corresponds to a relatively low recall for the purchase class. In practical terms, the model tends to be conservative and predicts “Not Purchased” more frequently, which likely reflects the imbalance in the dataset where non-purchasing visitors are much more common.
 
 Despite this limitation, the results demonstrate that behavioural engagement metrics contain meaningful predictive information about purchase intent. Features related to browsing activity appear to capture patterns associated with purchasing behaviour, even when using a relatively simple logistic regression model.
 

@@ -17,8 +17,8 @@ all: report
 # --- 1. Data Processing ---
 data_processing: data/shopping_data_cleaned.csv
 
-data/shopping_data_cleaned.csv: data/online_shoppers_data.csv scripts/clean_data.py
-	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/clean_data.py \
+data/shopping_data_cleaned.csv: data/online_shoppers_data.csv scripts/02_clean_data.py
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/02_clean_data.py \
 		data/online_shoppers_data.csv \
 		data/shopping_data_cleaned.csv"
 
@@ -34,16 +34,16 @@ validate: .validated
 # --- 2. Exploratory Data Analysis (EDA) ---
 eda: results/eda_correlation_heatmap.png
 
-results/eda_correlation_heatmap.png: .validated scripts/init_eda.py
-	$(DOCKER_RUN) $(CONDA_EXEC) python scripts/init_eda.py \
+results/eda_correlation_heatmap.png: data/shopping_data_cleaned.csv scripts/03_init_eda.py
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/03_init_eda.py \
 		data/shopping_data_cleaned.csv \
 		results/eda
 
 # --- 3. Modeling ---
 modeling: results/model_confusion_matrix.png
 
-results/model_confusion_matrix.png: .validated scripts/create_model_and_results.py
-	$(DOCKER_RUN) $(CONDA_EXEC) python scripts/create_model_and_results.py \
+results/model_confusion_matrix.png: data/shopping_data_cleaned.csv scripts/04_create_model_and_results.py
+	$(DOCKER_RUN) $(CONDA_EXEC) bash -c "PYTHONPATH=. python scripts/04_create_model_and_results.py \
 		data/shopping_data_cleaned.csv \
 		results/model
 
